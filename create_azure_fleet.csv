@@ -1,0 +1,15 @@
+region,name,size,max_price(USD/hour)
+eastus,test-vm-1,Standard_F2s_v2,0.013
+westeurope,test-vm-2,Standard_F2s_v2,0.012
+northeurope,test-vm-3,Standard_F2s_v2,0.015
+uksouth,test-vm-4,Standard_F2s_v2,0.013
+switzerlandnorth,test-vm-5,Standard_F2s_v2,0.011
+francecentral,test-vm-6,Standard_F2s_v2,0.011
+centralindia,test-vm-7,Standard_F2s_v2,0.009
+koreacentral,test-vm-8,Standard_F2s_v2,0.01
+eastasia,test-vm-9,Standard_F2s_v2,0.011
+japaneast,test-vm-10,Standard_F2s_v2,0.011
+brazilsouth,test-vm-11,Standard_F2s_v2,0.014
+canadacentral,test-vm-12,Standard_F2s_v2,0.01
+southafricanorth,test-vm-13,Standard_F2s_v2,0.012
+australiaeast,test-vm-14,Standard_F2s_v2,0.012

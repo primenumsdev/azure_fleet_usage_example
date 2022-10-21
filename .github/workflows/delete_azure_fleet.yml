@@ -1,0 +1,25 @@
+name: delete_azure_fleet
+
+on:
+  workflow_dispatch:
+
+jobs:
+  delete_azure_fleet:
+    runs-on: ubuntu-latest
+    steps:
+
+    - name: Azure Login
+      uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+    - name: Checkout
+      uses: actions/checkout@v1
+
+    - name: Azure CLI script file
+      uses: azure/CLI@v1
+      with:
+        azcliversion: 2.41.0
+        inlineScript: |
+          chmod +x $GITHUB_WORKSPACE/delete_azure_fleet.sh
+          $GITHUB_WORKSPACE/delete_azure_fleet.sh

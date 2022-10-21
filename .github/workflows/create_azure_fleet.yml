@@ -1,0 +1,48 @@
+name: create_azure_fleet
+
+on:
+  workflow_dispatch:
+    inputs:
+      input_file_name:
+        description: 'Input file name (csv):'
+        required: true
+        default: 'create_azure_fleet.csv'
+        type: string
+
+jobs:
+  create_azure_fleet:
+    runs-on: ubuntu-latest
+    steps:
+
+    - name: Azure Login
+      uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+    - name: Checkout
+      uses: actions/checkout@v1
+
+    - name: Azure CLI script file
+      uses: azure/CLI@v1
+      env:
+        SSH_USER_NAME: ${{ secrets.SSH_USER_NAME }}
+        SSH_PASSWORD: ${{ secrets.SSH_PASSWORD }}
+      with:
+        azcliversion: 2.41.0
+        inlineScript: |
+          chmod +x $GITHUB_WORKSPACE/create_azure_fleet.sh
+          $GITHUB_WORKSPACE/create_azure_fleet.sh
+
+    - name: Setup GIT
+      run: |
+        git config user.name "🤖 GitHub Actions Bot"
+        git config user.email "<>"
+
+    - name: Commit and Push
+      run: |
+        git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
+        git checkout "${GITHUB_REF:11}"
+        git add -A
+        git commit -am "🚢 Azure fleet deployed"
+        git push origin main
+        
